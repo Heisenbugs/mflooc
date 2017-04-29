@@ -9,19 +9,86 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/39ff94f6b9.js"></script>
 </head>
 
 <body>
 
-    <table class="table table-striped">
-      <thead>
-        <th></th>
-      </thead>
-
-    </table>
-
-
+    <div class="col-md-12">
+        <h1 id="heading"></h1>
+        <hr>
+        <div class="row">
+            <div class="col-md-3">
+                <strong><em>Low Elevation</em></strong><br>
+                <div class="form-inline">
+                    <span id="lowElev"></span>
+                    <div class="form-group">
+                        <input type="range" id="lowelev_range" oninput="getElevRange(this.value)" value="10">
+                    </div>
+                    <span id="hiElev"></span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <strong><em>Population Density</em></strong><br>
+                <div class="form-inline">
+                    <span id="lowPop"></span>
+                    <div class="form-group">
+                        <input type="range" id="lowelev_range" value="10">
+                    </div>
+                    <span id="hiPop"></span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <strong><em>Eco Risk</em></strong><br>
+                <div class="form-inline">
+                    <span>123</span>
+                    <div class="form-group">
+                        <input type="range" id="lowelev_range" value="10">
+                    </div>
+                    <span>123</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <strong><em>Mortality Risk</em></strong><br>
+                <div class="form-inline">
+                    <span>123</span>
+                    <div class="form-group">
+                        <input type="range" id="lowelev_range" value="10">
+                    </div>
+                    <span>123</span>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped" id="table">
+            <thead>
+                <th>name</th>
+                <th>count <button class="btn btn-default btn-xs" onclick="toggleSort('count')"><i class="fa fa-caret-down" aria-hidden="true" id="count_icon"></i></button></th>
+                <th>lat <button class="btn btn-default btn-xs" onclick="toggleSort('lat')"><i class="fa fa-caret-down" aria-hidden="true" id="lat_icon"></i></button></th>
+                <th>long <button class="btn btn-default btn-xs" onclick="toggleSort('long')"><i class="fa fa-caret-down" aria-hidden="true" id="long_icon"></i></button> </th>
+                <th>category </th>
+                <th>lowelev <button class="btn btn-default btn-xs" onclick="toggleSort('lowelev')"><i class="fa fa-caret-down" aria-hidden="true" id="lowelev_icon"></i></button></th>
+                <th>popden <button class="btn btn-default btn-xs" onclick="toggleSort('popden')"><i class="fa fa-caret-down" aria-hidden="true" id="popden_icon"></i></button></th>
+                <th>ecorisk <button class="btn btn-default btn-xs" onclick="toggleSort('ecorisk')"><i class="fa fa-caret-down" aria-hidden="true" id="ecorisk_icon"></i></button></th>
+                <th>mortarisk <button class="btn btn-default btn-xs" onclick="toggleSort('mortarisk')"><i class="fa fa-caret-down" aria-hidden="true" id="mortarisk_icon"></i></button></th>
+                <th>ffreq <button class="btn btn-default btn-xs" onclick="toggleSort('ffreq')"><i class="fa fa-caret-down" aria-hidden="true" id="ffreq_icon"></i></button></th>
+                <th>shortsum</th>
+                <th>morelink</th>
+            </thead>
+            <tbody id="table_body">
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>
+
+<script src="./app.js"></script>
+<script>
+    $(document).ready(function() {
+        getAllData();
+        getLowelevHiLow();
+        getPopDenHiLow();
+    });
+</script>
