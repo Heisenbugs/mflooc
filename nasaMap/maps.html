@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Heatmaps</title>
+	<link rel="stylesheet" type="text/css" href="maps.css">
+</head>
+
+<body>
+	<div id="floating-panel">
+		<select onChange="toggle(this.value)">
+			<option value="1">Mortality</option>
+			<option value="2">Height from sea floor</option>
+			<option value="3">Area with most population density</option>
+		</select>
+	</div>
+	<div id="map"></div>
+
+	<script src="maps.js" type="text/javascript"></script>
+	<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDh3IEYR7Vw3SIiFRmps3WJATcscWUY-C4&libraries=visualization&callback=initMap">
+</script>
+
+</body>
+</html>
