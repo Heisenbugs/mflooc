@@ -298,16 +298,118 @@ function getPopDenHiLow() {
     document.getElementById('lowPop').innerHTML = mn;
 }
 
+// get range for elev
 function getElevRange(input) {
-  var mx = document.getElementById('hiElev').innerHTML;
-  var mn = document.getElementById('lowElev').innerHTML;
-  var unit = (mx - mn) + 1;
-  unit = 100 / unit;
-  filterData(input/unit);
+    var mx = document.getElementById('hiElev').innerHTML;
+    var mn = document.getElementById('lowElev').innerHTML;
+    var unit = (mx - mn) + 1;
+    unit = 100 / unit;
+    filterElevData(input / unit);
+}
+
+// filter data for lowelev
+function filterElevData(num) {
+    var filterNum = parseInt(num);
+    console.log(filterNum);
+    var newData = [];
+    dummyData['places'].filter((obj) => {
+        if (obj['lowelev'] <= filterNum) {
+            newData.push(obj);
+        }
+    });
+
+    // rearrange table data
+    var tableRef = document.getElementById('table').getElementsByTagName('tbody')[0];
+    tableRef.innerHTML = '';
+    for (var i = 0; i < newData.length; i++) {
+        tableData.push(newData[i]);
+        // Insert a row in the table at the last row
+        var newRow = tableRef.insertRow(tableRef.rows.length);
+        // Insert a cell in the row at index 0
+        var nameCell = newRow.insertCell(0);
+        var countCell = newRow.insertCell(1);
+        var latCell = newRow.insertCell(2);
+        var longCell = newRow.insertCell(3)
+        var categoryCell = newRow.insertCell(4);
+        var lowelevCell = newRow.insertCell(5);
+        var popdenCell = newRow.insertCell(6);
+        var ecoriskCell = newRow.insertCell(7);
+        var mortariskCell = newRow.insertCell(8);
+        var ffreqCell = newRow.insertCell(9);
+        var shortsumCell = newRow.insertCell(10);
+        var morelinkCell = newRow.insertCell(11);
+        // Append a text node to the cell
+        nameCell.appendChild(document.createTextNode(newData[i].name));
+        countCell.appendChild(document.createTextNode(newData[i].count));
+        latCell.appendChild(document.createTextNode(newData[i].lat));
+        longCell.appendChild(document.createTextNode(newData[i].long));
+        categoryCell.appendChild(document.createTextNode(newData[i].category));
+        lowelevCell.appendChild(document.createTextNode(newData[i].lowelev));
+        popdenCell.appendChild(document.createTextNode(newData[i].popden));
+        ecoriskCell.appendChild(document.createTextNode(newData[i].ecorisk));
+        mortariskCell.appendChild(document.createTextNode(newData[i].mortarisk));
+        ffreqCell.appendChild(document.createTextNode(newData[i].ffreq));
+        shortsumCell.appendChild(document.createTextNode(newData[i].shortsum));
+        morelinkCell.appendChild(document.createTextNode(newData[i].morelink));
+    }
+}
+
+// get range for pop density
+function getPopRange(input) {
+    var mx = document.getElementById('hiPop').innerHTML;
+    document.getElementById('popden_range').max = mx;
+    var mn = document.getElementById('lowPop').innerHTML;
+    document.getElementById('popden_range').min = mn;
+    var unit = (mx - mn) / 100;
+    document.getElementById('popden_range').step = unit;
+    filterPopData(input);
 }
 
 
+// filter data for popdensity
+function filterPopData(num) {
+    var filterNum = parseInt(num);
+    var newData = [];
+    dummyData['places'].filter((obj) => {
+        if (obj['popden'] <= filterNum) {
+            newData.push(obj);
+        }
+    });
 
-function filterData(){
+    console.log(newData);
 
+    // rearrange table data
+    var tableRef = document.getElementById('table').getElementsByTagName('tbody')[0];
+    tableRef.innerHTML = '';
+    for (var i = 0; i < newData.length; i++) {
+        tableData.push(newData[i]);
+        // Insert a row in the table at the last row
+        var newRow = tableRef.insertRow(tableRef.rows.length);
+        // Insert a cell in the row at index 0
+        var nameCell = newRow.insertCell(0);
+        var countCell = newRow.insertCell(1);
+        var latCell = newRow.insertCell(2);
+        var longCell = newRow.insertCell(3)
+        var categoryCell = newRow.insertCell(4);
+        var lowelevCell = newRow.insertCell(5);
+        var popdenCell = newRow.insertCell(6);
+        var ecoriskCell = newRow.insertCell(7);
+        var mortariskCell = newRow.insertCell(8);
+        var ffreqCell = newRow.insertCell(9);
+        var shortsumCell = newRow.insertCell(10);
+        var morelinkCell = newRow.insertCell(11);
+        // Append a text node to the cell
+        nameCell.appendChild(document.createTextNode(newData[i].name));
+        countCell.appendChild(document.createTextNode(newData[i].count));
+        latCell.appendChild(document.createTextNode(newData[i].lat));
+        longCell.appendChild(document.createTextNode(newData[i].long));
+        categoryCell.appendChild(document.createTextNode(newData[i].category));
+        lowelevCell.appendChild(document.createTextNode(newData[i].lowelev));
+        popdenCell.appendChild(document.createTextNode(newData[i].popden));
+        ecoriskCell.appendChild(document.createTextNode(newData[i].ecorisk));
+        mortariskCell.appendChild(document.createTextNode(newData[i].mortarisk));
+        ffreqCell.appendChild(document.createTextNode(newData[i].ffreq));
+        shortsumCell.appendChild(document.createTextNode(newData[i].shortsum));
+        morelinkCell.appendChild(document.createTextNode(newData[i].morelink));
+    }
 }
