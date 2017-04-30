@@ -4,6 +4,8 @@ var countOrder = 'ASC';
 var sortIconClass = 'fa fa-caret-square-o-down';
 var elevArray = [];
 var popdenArray = [];
+var ecoriskArray = [];
+var mortariskArray = [];
 
 var dummyData = {
     "country": "Bangladesh",
@@ -298,6 +300,16 @@ function getPopDenHiLow() {
     document.getElementById('lowPop').innerHTML = mn;
 }
 
+function getEcoRiskHiLow() {
+    dummyData['places'].map((item) => {
+        ecoriskArray.push(item['ecorisk']);
+    });
+    var mx = Math.max(...ecoriskArray);
+    document.getElementById('hiEcoRisk').innerHTML = mx;
+    var mn = Math.min(...ecoriskArray);
+    document.getElementById('lowEcoRisk').innerHTML = mn;
+}
+
 // get range for elev
 function getElevRange(input) {
     var mx = document.getElementById('hiElev').innerHTML;
@@ -305,6 +317,17 @@ function getElevRange(input) {
     var unit = (mx - mn) + 1;
     unit = 100 / unit;
     filterElevData(input / unit);
+}
+
+// get range for moratr risk
+function getMortaRiskHiLow() {
+    dummyData['places'].map((item) => {
+        mortariskArray.push(item['mortarisk']);
+    });
+    var mx = Math.max(...mortariskArray);
+    document.getElementById('hiMortaRisk').innerHTML = mx;
+    var mn = Math.min(...mortariskArray);
+    document.getElementById('lowMortaRisk').innerHTML = mn;
 }
 
 // filter data for lowelev
@@ -376,7 +399,119 @@ function filterPopData(num) {
         }
     });
 
-    console.log(newData);
+    // rearrange table data
+    var tableRef = document.getElementById('table').getElementsByTagName('tbody')[0];
+    tableRef.innerHTML = '';
+    for (var i = 0; i < newData.length; i++) {
+        tableData.push(newData[i]);
+        // Insert a row in the table at the last row
+        var newRow = tableRef.insertRow(tableRef.rows.length);
+        // Insert a cell in the row at index 0
+        var nameCell = newRow.insertCell(0);
+        var countCell = newRow.insertCell(1);
+        var latCell = newRow.insertCell(2);
+        var longCell = newRow.insertCell(3)
+        var categoryCell = newRow.insertCell(4);
+        var lowelevCell = newRow.insertCell(5);
+        var popdenCell = newRow.insertCell(6);
+        var ecoriskCell = newRow.insertCell(7);
+        var mortariskCell = newRow.insertCell(8);
+        var ffreqCell = newRow.insertCell(9);
+        var shortsumCell = newRow.insertCell(10);
+        var morelinkCell = newRow.insertCell(11);
+        // Append a text node to the cell
+        nameCell.appendChild(document.createTextNode(newData[i].name));
+        countCell.appendChild(document.createTextNode(newData[i].count));
+        latCell.appendChild(document.createTextNode(newData[i].lat));
+        longCell.appendChild(document.createTextNode(newData[i].long));
+        categoryCell.appendChild(document.createTextNode(newData[i].category));
+        lowelevCell.appendChild(document.createTextNode(newData[i].lowelev));
+        popdenCell.appendChild(document.createTextNode(newData[i].popden));
+        ecoriskCell.appendChild(document.createTextNode(newData[i].ecorisk));
+        mortariskCell.appendChild(document.createTextNode(newData[i].mortarisk));
+        ffreqCell.appendChild(document.createTextNode(newData[i].ffreq));
+        shortsumCell.appendChild(document.createTextNode(newData[i].shortsum));
+        morelinkCell.appendChild(document.createTextNode(newData[i].morelink));
+    }
+}
+
+// get range for elev
+function getEcoRiskRange(input) {
+  var mx = document.getElementById('hiEcoRisk').innerHTML;
+  document.getElementById('ecorisk_range').max = mx;
+  var mn = document.getElementById('lowEcoRisk').innerHTML;
+  document.getElementById('ecorisk_range').min = mn;
+  var unit = (mx - mn) / 100;
+  document.getElementById('ecorisk_range').step = unit;
+  filterEcoRiskData(input);
+}
+
+// filter data for ecorisk
+function filterEcoRiskData(num) {
+    var filterNum = parseInt(num);
+    var newData = [];
+    dummyData['places'].filter((obj) => {
+        if (obj['ecorisk'] <= filterNum) {
+            newData.push(obj);
+        }
+    });
+
+    // rearrange table data
+    var tableRef = document.getElementById('table').getElementsByTagName('tbody')[0];
+    tableRef.innerHTML = '';
+    for (var i = 0; i < newData.length; i++) {
+        tableData.push(newData[i]);
+        // Insert a row in the table at the last row
+        var newRow = tableRef.insertRow(tableRef.rows.length);
+        // Insert a cell in the row at index 0
+        var nameCell = newRow.insertCell(0);
+        var countCell = newRow.insertCell(1);
+        var latCell = newRow.insertCell(2);
+        var longCell = newRow.insertCell(3)
+        var categoryCell = newRow.insertCell(4);
+        var lowelevCell = newRow.insertCell(5);
+        var popdenCell = newRow.insertCell(6);
+        var ecoriskCell = newRow.insertCell(7);
+        var mortariskCell = newRow.insertCell(8);
+        var ffreqCell = newRow.insertCell(9);
+        var shortsumCell = newRow.insertCell(10);
+        var morelinkCell = newRow.insertCell(11);
+        // Append a text node to the cell
+        nameCell.appendChild(document.createTextNode(newData[i].name));
+        countCell.appendChild(document.createTextNode(newData[i].count));
+        latCell.appendChild(document.createTextNode(newData[i].lat));
+        longCell.appendChild(document.createTextNode(newData[i].long));
+        categoryCell.appendChild(document.createTextNode(newData[i].category));
+        lowelevCell.appendChild(document.createTextNode(newData[i].lowelev));
+        popdenCell.appendChild(document.createTextNode(newData[i].popden));
+        ecoriskCell.appendChild(document.createTextNode(newData[i].ecorisk));
+        mortariskCell.appendChild(document.createTextNode(newData[i].mortarisk));
+        ffreqCell.appendChild(document.createTextNode(newData[i].ffreq));
+        shortsumCell.appendChild(document.createTextNode(newData[i].shortsum));
+        morelinkCell.appendChild(document.createTextNode(newData[i].morelink));
+    }
+}
+
+
+// get range for mortarisk
+function getMortaRiskRange(input) {
+    var mx = document.getElementById('hiMortaRisk').innerHTML;
+    document.getElementById('mortarisk_range').max = mx;
+    var mn = document.getElementById('lowMortaRisk').innerHTML;
+    document.getElementById('mortarisk_range').min = mn;
+    var unit = (mx - mn) / 100;
+    document.getElementById('mortarisk_range').step = unit;
+    filterMortarRiskData(input);
+}
+
+function filterMortarRiskData(num) {
+    var filterNum = parseInt(num);
+    var newData = [];
+    dummyData['places'].filter((obj) => {
+        if (obj['mortarisk'] <= filterNum) {
+            newData.push(obj);
+        }
+    });
 
     // rearrange table data
     var tableRef = document.getElementById('table').getElementsByTagName('tbody')[0];

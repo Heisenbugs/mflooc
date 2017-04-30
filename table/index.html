@@ -43,21 +43,21 @@
             <div class="col-md-3">
                 <strong><em>Eco Risk</em></strong><br>
                 <div class="form-inline">
-                    <span>123</span>
+                    <span id="lowEcoRisk"></span>
                     <div class="form-group">
-                        <input type="range" id="lowelev_range" value="10">
+                        <input type="range" id="ecorisk_range" value="10" oninput="getEcoRiskRange(this.value)">
                     </div>
-                    <span>123</span>
+                    <span id="hiEcoRisk"></span>
                 </div>
             </div>
             <div class="col-md-3">
                 <strong><em>Mortality Risk</em></strong><br>
                 <div class="form-inline">
-                    <span>123</span>
+                    <span id="lowMortaRisk"></span>
                     <div class="form-group">
-                        <input type="range" id="lowelev_range" value="10">
+                        <input type="range" id="mortarisk_range" value="10" oninput="getMortaRiskRange(this.value)">
                     </div>
-                    <span>123</span>
+                    <span id="hiMortaRisk"></span>
                 </div>
             </div>
         </div>
@@ -90,5 +90,7 @@
         getAllData();
         getLowelevHiLow();
         getPopDenHiLow();
+        getEcoRiskHiLow();
+        getMortaRiskHiLow();
     });
 </script>
