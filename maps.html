@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Heatmaps</title>
+	<link rel="stylesheet" type="text/css" href="resources/maps.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+	
+	<div id="floating-panel" class="bootstrap">
+		<select onChange="toggle(this.value)">
+			<option value="1">Extremely risky</option>
+			<option value="2">Highly risky</option>
+			<option value="3">Moderately risky</option>
+		</select>
+	</div>
+	<div id="map"></div>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js" type="text/javascript"></script>	
+	<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+	</script>
+	<script src="js/maps.js" type="text/javascript"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDh3IEYR7Vw3SIiFRmps3WJATcscWUY-C4&libraries=visualization&callback=initMap"></script>
+
+</body>
+</html>
